@@ -1,17 +1,33 @@
 <template>
   <div class="calendar">
-    <h1>Testing this message here!</h1>
-    <!-- <h1>{{ title }}</h1>
-    <h2>{{ computedTitle }}</h2> -->
-    <!-- <app-calendar-day></app-calendar-day> -->
+    <h1>{{ title }}</h1>
+    <!-- <h2>{{ computedTitle }}</h2> -->
+    <app-calendar-day
+      v-bind:dayOfWeek="days[0]"
+      v-bind:dayNumber="1"
+      v-bind:hasEvent="this.hasEvent"
+      v-on:eventStatusUpdated="hasEvent = $event"
+    ></app-calendar-day>
+    <hr />
+    <app-calendar-day
+      v-bind:dayOfWeek="days[1]"
+      v-bind:dayNumber="2"
+      v-bind:hasEvent="this.hasEvent"
+      v-on:eventStatusUpdated="hasEvent = $event"
+    ></app-calendar-day>
   </div>
 </template>
 
+<style></style>
+
 <script>
+// import ___ from "./components/__.vue";
 export default {
-  data: function () {
+  data() {
     return {
       title: "hello world. this is a calendar.",
+      days: ["Mon", "Tue", "Wed"],
+      hasEvent: false,
     };
   },
   // methods: {
@@ -30,16 +46,6 @@ export default {
   // filters: {
   //   lowercase: function (value) {
   //     return value.toLowerCase();
-  //   },
-  // },
-  // //to register local components from another file into this file:
-  // import ___ from "./components/__.vue";
-  // components: {
-  //   "app-calendar-day": {
-  //     data: function () {
-  //       return { days: ["mon", "tue", "wed"] };
-  //     },
-  //     template: "<div>days go here.</div>",
   //   },
   // },
 };
