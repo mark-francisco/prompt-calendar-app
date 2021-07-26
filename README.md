@@ -1,6 +1,6 @@
 # prompt-calendar-app
 
-## Pre-requisites: npm package manager is installed.
+## Pre-requisites: nodeJS / npm package manager installed on your computer.
 
 ## Instructions:
 
