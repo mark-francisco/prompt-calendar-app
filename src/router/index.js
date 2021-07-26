@@ -1,22 +1,30 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import AddEvent from "./views/AddEvent.vue";
-// import EditEvent from "./views/EditEvent.vue";
+// import Calendar from "../components/Calendar.vue";
+import AddEvent from "../views/AddEvent.vue";
+import EditEvent from "../views/EditEvent.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   // {
-  //   path: "/add",
-  //   name: "AddEvent",
-  //   component: AddEvent,
+  //   path: "/",
+  //   component: Calendar,
   // },
+  {
+    path: "/add",
+    component: AddEvent,
+  },
+  {
+    path: "/edit",
+    component: EditEvent,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes: routes,
 });
 
 export default router;
