@@ -1,17 +1,19 @@
 <template>
   <div class="calendar">
-    <app-heading v-bind:today="today" />
+    <app-heading v-bind:selectedDate="selectedDate" />
 
     <ol class="calendar-days-grid">
-      <app-calendar-day v-for="day in listOfDays" v-bind:key="day.date" v-bind:dayNumber="1"></app-calendar-day>
+      <app-calendar-day
+        v-for="day in days"
+        v-bind:key="day.date"
+        v-bind:dayNumber="day.dayOfMonth"
+        v-bind:isToday="today.format('YYYY-MM-DD') === day.date"
+      ></app-calendar-day>
+      <!-- v-bind:hasEvent="this.hasEvent"
+        v-on:eventStatusUpdated="hasEvent = $event" -->
     </ol>
 
-    <!-- <app-calendar-day
-      v-bind:dayNumber="1"
-      v-bind:hasEvent="this.hasEvent"
-      v-on:eventStatusUpdated="hasEvent = $event"
-    ></app-calendar-day>
-     -->
+    <div>{{ daysArray }}</div>
   </div>
 </template>
 
@@ -19,6 +21,7 @@
 .calendar-days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   border: 1px solid black;
   padding: 5px;
 }
@@ -26,22 +29,47 @@
 
 <script>
 import dayjs from "dayjs";
+import weekday from "dayjs/plugin/weekday";
+dayjs.extend(weekday);
 
 export default {
   data() {
     return {
-      listOfDays: ["day1", "day2", "day3"],
       today: dayjs(),
+      selectedDate: dayjs(),
     };
   },
   methods: {
-    // today() {
-    //   return dayjs().format("YYYY-MM-DD");
-    // },
+    getWeekday(date) {
+      return dayjs(date).weekday();
+    },
   },
   computed: {
     days() {
-      return this.currentMonthDays;
+      return this.daysArray;
+    },
+    numDaysInMonth() {
+      return dayjs(this.selectedDate).daysInMonth();
+    },
+
+    month() {
+      return Number(this.selectedDate.format("M"));
+    },
+
+    year() {
+      return Number(this.selectedDate.format("YYYY"));
+    },
+
+    daysArray() {
+      // construct new Array with defined length, but with empty values.
+      // map each of the arrItems into objects
+      return [...new Array(this.numDaysInMonth)].map((_arrItem, index) => {
+        return {
+          date: dayjs(`${this.year}-${this.month}-${index + 1}`).format("YYYY-MM-DD"),
+          dayOfMonth: dayjs(`${this.year}-${this.month}-${index + 1}`).date(),
+          dayOfWeek: dayjs(`${this.year}-${this.month}-${index + 1}`).day(),
+        };
+      });
     },
   },
 };

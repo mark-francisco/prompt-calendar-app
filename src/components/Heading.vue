@@ -21,7 +21,7 @@
 <script>
 export default {
   props: {
-    today: {
+    selectedDate: {
       type: Object,
       required: true,
     },
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     currentMonthYear() {
-      return this.today.format("MMMM YYYY");
+      return this.selectedDate.format("MMMM YYYY");
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ dayNumber }}</p>
+    <li class="calendar-day">{{ dayNumber }}</li>
     <!-- <button v-on:click="addEvent()">Add Event</button>
     <label>Title</label>
     <input type="text" />
@@ -9,11 +9,26 @@
   </div>
 </template>
 
-<style></style>
+<style>
+.calendar-day {
+  list-style: none;
+  border: 1px solid black;
+  padding: 15px 5px;
+}
+</style>
 
 <script>
 export default {
-  props: ["dayNumber", "hasEvent"],
+  props: {
+    dayNumber: {
+      type: Number,
+      required: true,
+    },
+    hasEvent: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       newEventStatus: this.hasEvent,

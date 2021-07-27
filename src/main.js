@@ -4,16 +4,16 @@ import App from "./App.vue";
 import router from "./router";
 
 // Bootstrap and BootstrapVue:
-import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+// import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap-vue/dist/bootstrap-vue.css";
 
-Vue.use(BootstrapVue);
-Vue.use(BootstrapVueIcons);
+// Vue.use(BootstrapVue);
+// Vue.use(BootstrapVueIcons);
 
 // Day.js
-import dayjs from "dayjs"; // ES 2015
-dayjs().format();
+// import dayjs from "dayjs"; // ES 2015
+// dayjs().format();
 
 // Component files:
 import Calendar from "./components/Calendar.vue";
