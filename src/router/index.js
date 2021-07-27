@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Calendar from "../components/Calendar.vue";
 import AddEvent from "../views/AddEvent.vue";
 import EditEvent from "../views/EditEvent.vue";
 
@@ -13,10 +12,12 @@ const routes = [
   // },
   {
     path: "/add",
+    name: "addEvent",
     component: AddEvent,
   },
   {
     path: "/edit",
+    name: "editEvent",
     component: EditEvent,
   },
 ];

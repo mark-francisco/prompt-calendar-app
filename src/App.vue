@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h1>Calendar App</h1>
+    <hr />
     <app-calendar />
     <!-- router-view: Vue router will conditionally load the appropriate component based on URL-->
     <router-view />

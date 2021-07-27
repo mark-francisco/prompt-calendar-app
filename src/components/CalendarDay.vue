@@ -1,12 +1,11 @@
 <template>
   <div>
-    <p>{{ dayOfWeek }}</p>
     <p>{{ dayNumber }}</p>
-    <button v-on:click="addEvent()">Add Event</button>
+    <!-- <button v-on:click="addEvent()">Add Event</button>
     <label>Title</label>
     <input type="text" />
     <p>{{ hasEvent }}</p>
-    <p>{{ newEventStatus }}</p>
+    <p>{{ newEventStatus }}</p> -->
   </div>
 </template>
 
@@ -14,7 +13,7 @@
 
 <script>
 export default {
-  props: ["dayOfWeek", "dayNumber", "hasEvent"],
+  props: ["dayNumber", "hasEvent"],
   data() {
     return {
       newEventStatus: this.hasEvent,
@@ -22,6 +21,7 @@ export default {
   },
   methods: {
     addEvent() {
+      this.$router.push({ name: "addEvent", params: { date: "DDMMYYYY" } });
       this.newEventStatus = !this.hasEvent;
       this.$emit("eventStatusUpdated", this.newEventStatus);
     },

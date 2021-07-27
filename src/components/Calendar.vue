@@ -1,52 +1,48 @@
 <template>
   <div class="calendar">
-    <h1>{{ title }}</h1>
-    <!-- <h2>{{ computedTitle }}</h2> -->
-    <app-calendar-day
-      v-bind:dayOfWeek="days[0]"
+    <app-heading v-bind:today="today" />
+
+    <ol class="calendar-days-grid">
+      <app-calendar-day v-for="day in listOfDays" v-bind:key="day.date" v-bind:dayNumber="1"></app-calendar-day>
+    </ol>
+
+    <!-- <app-calendar-day
       v-bind:dayNumber="1"
       v-bind:hasEvent="this.hasEvent"
       v-on:eventStatusUpdated="hasEvent = $event"
     ></app-calendar-day>
-    <hr />
-    <app-calendar-day
-      v-bind:dayOfWeek="days[1]"
-      v-bind:dayNumber="2"
-      v-bind:hasEvent="this.hasEvent"
-      v-on:eventStatusUpdated="hasEvent = $event"
-    ></app-calendar-day>
+     -->
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid black;
+  padding: 5px;
+}
+</style>
 
 <script>
-// import ___ from "./components/__.vue";
+import dayjs from "dayjs";
+
 export default {
   data() {
     return {
-      title: "hello world. this is a calendar.",
-      days: ["Mon", "Tue", "Wed"],
-      hasEvent: false,
+      listOfDays: ["day1", "day2", "day3"],
+      today: dayjs(),
     };
   },
-  // methods: {
-  //   // changeTitle() {
-  //   // }
-  // },
-  // created: function () {
-  //   // methods: {
-  //   // }
-  // },
-  // computed: {
-  //   computedTitle() {
-  //     return this.title + "yo";
-  //   },
-  // },
-  // filters: {
-  //   lowercase: function (value) {
-  //     return value.toLowerCase();
-  //   },
-  // },
+  methods: {
+    // today() {
+    //   return dayjs().format("YYYY-MM-DD");
+    // },
+  },
+  computed: {
+    days() {
+      return this.currentMonthDays;
+    },
+  },
 };
 </script>
