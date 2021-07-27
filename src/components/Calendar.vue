@@ -15,6 +15,14 @@
 
     <div>{{ daysArray }}</div>
   </div>
+
+  <!-- next steps: -->
+  <!-- offset arr to align the weekdays somehow -->
+  <!-- add events properties to days -->
+  <!-- complete CalendarDay component -->
+  <!-- complete AddEvent and EditEvent components -->
+  <!-- add ability to change month / year -->
+  <!-- add styles based on isToday -->
 </template>
 
 <style scoped>
@@ -40,9 +48,9 @@ export default {
     };
   },
   methods: {
-    getWeekday(date) {
-      return dayjs(date).weekday();
-    },
+    // getWeekday(date) {
+    //   return dayjs(date).weekday();
+    // },
   },
   computed: {
     days() {
