@@ -6,21 +6,23 @@
       <app-calendar-day
         v-for="day in daysArray"
         v-bind:key="day.formattedDate"
-        v-bind:dayNumber="day.dayOfMonth"
+        v-bind:formattedDate="day.formattedDate"
+        v-bind:dayOfMonth="day.dayOfMonth"
+        v-bind:isCurrentMonth="day.currentMonth"
         v-bind:isToday="today.format('YYYY-MM-DD') === day.date"
-        v-bind:currentMonth="day.currentMonth"
+        v-bind:event="
+          events.find((event) => {
+            return event.date === day.formattedDate;
+          })
+        "
       ></app-calendar-day>
-      <!-- v-bind:hasEvent="this.hasEvent"
-        v-on:eventStatusUpdated="hasEvent = $event" -->
     </ol>
 
-    <div>{{ daysArray }}</div>
+    <div>{{ events }}</div>
   </div>
 
   <!-- next steps: -->
-  <!-- offset arr to align the weekdays somehow -->
   <!-- add events properties to days -->
-  <!-- complete CalendarDay component -->
   <!-- complete AddEvent and EditEvent components -->
   <!-- add ability to change month / year -->
   <!-- add styles based on isToday -->
@@ -37,23 +39,16 @@
 
 <script>
 import dayjs from "dayjs";
-import weekday from "dayjs/plugin/weekday";
-dayjs.extend(weekday);
 
 export default {
   data() {
     return {
       today: dayjs(),
       selectedDate: dayjs().add(0, "month"),
+      events: [{ title: "test welcome event", date: dayjs().format("YYYY-MM-DD") }],
     };
   },
-  methods: {
-    // addOffsetToDaysArray() {
-    //   for (let i = 0; i < this.weekdayOffset; i++) {
-    //     this.daysArray.unshift(1);
-    //   }
-    // },
-  },
+  methods: {},
   computed: {
     // helper methods for generating the dayjs objects
     numDaysInMonth() {
