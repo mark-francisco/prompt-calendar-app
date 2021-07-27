@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <li class="calendar-day">{{ dayNumber }}</li>
-    <!-- <button v-on:click="addEvent()">Add Event</button>
-    <label>Title</label>
-    <input type="text" />
-    <p>{{ hasEvent }}</p>
+  <div class="calendar-day">
+    <li>{{ dayNumber }}</li>
+    <button v-if="currentMonth" v-on:click="addEvent()">Add Event</button>
+    <!-- <p>{{ hasEvent }}</p>
     <p>{{ newEventStatus }}</p> -->
   </div>
 </template>
@@ -13,7 +11,7 @@
 .calendar-day {
   list-style: none;
   border: 1px solid black;
-  padding: 15px 5px;
+  padding: 5px;
 }
 </style>
 
@@ -27,6 +25,9 @@ export default {
     hasEvent: {
       type: Boolean,
       default: false,
+    },
+    currentMonth: {
+      type: Boolean,
     },
   },
   data() {

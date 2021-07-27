@@ -4,10 +4,11 @@
 
     <ol class="calendar-days-grid">
       <app-calendar-day
-        v-for="day in days"
-        v-bind:key="day.date"
+        v-for="day in daysArray"
+        v-bind:key="day.formattedDate"
         v-bind:dayNumber="day.dayOfMonth"
         v-bind:isToday="today.format('YYYY-MM-DD') === day.date"
+        v-bind:currentMonth="day.currentMonth"
       ></app-calendar-day>
       <!-- v-bind:hasEvent="this.hasEvent"
         v-on:eventStatusUpdated="hasEvent = $event" -->
@@ -44,22 +45,22 @@ export default {
   data() {
     return {
       today: dayjs(),
-      selectedDate: dayjs(),
+      selectedDate: dayjs().add(2, "month"),
     };
   },
   methods: {
-    // getWeekday(date) {
-    //   return dayjs(date).weekday();
+    // addOffsetToDaysArray() {
+    //   for (let i = 0; i < this.weekdayOffset; i++) {
+    //     this.daysArray.unshift(1);
+    //   }
     // },
   },
   computed: {
-    days() {
-      return this.daysArray;
-    },
     numDaysInMonth() {
       return dayjs(this.selectedDate).daysInMonth();
     },
 
+    // helper methods for generating the dayjs objects
     month() {
       return Number(this.selectedDate.format("M"));
     },
@@ -69,16 +70,35 @@ export default {
     },
 
     daysArray() {
-      // construct new Array with defined length, but with empty values.
-      // map each of the arrItems into objects
-      return [...new Array(this.numDaysInMonth)].map((_arrItem, index) => {
+      // create spread array based on a constructed array of defined length
+      let arr = [...new Array(this.numDaysInMonth)];
+
+      // map each of the empty arrItems into dayjs objects by using helper methods
+      arr = arr.map((_arrItem, index) => {
         return {
-          date: dayjs(`${this.year}-${this.month}-${index + 1}`).format("YYYY-MM-DD"),
+          date: dayjs(`${this.year}-${this.month}-${index + 1}`),
+          formattedDate: dayjs(`${this.year}-${this.month}-${index + 1}`).format("YYYY-MM-DD"),
           dayOfMonth: dayjs(`${this.year}-${this.month}-${index + 1}`).date(),
           dayOfWeek: dayjs(`${this.year}-${this.month}-${index + 1}`).day(),
+          currentMonth: true,
         };
       });
+      let firstDayOfMonth = arr[0];
+      for (let i = 0; i < firstDayOfMonth.dayOfWeek; i++) {
+        arr.unshift({
+          date: firstDayOfMonth.date.subtract(i + 1, "day"),
+          formattedDate: firstDayOfMonth.date.subtract(i + 1, "day").format("YYYY-MM-DD"),
+          dayOfMonth: firstDayOfMonth.date.subtract(i + 1, "day").date(),
+          dayOfWeek: firstDayOfMonth.date.subtract(i + 1, "day").day(),
+          currentMonth: false,
+        });
+      }
+      return arr;
     },
+    // weekdayOffset() {
+    //   const firstOfTheMonthWeekday = this.daysArray[0].dayOfWeek;
+    //   return firstOfTheMonthWeekday;
+    // },
   },
 };
 </script>
