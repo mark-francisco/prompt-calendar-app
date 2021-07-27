@@ -1,7 +1,9 @@
 <template>
   <div class="calendar-day">
-    <li>{{ dayNumber }}</li>
-    <button v-if="currentMonth" v-on:click="addEvent()">Add Event</button>
+    <div v-if="currentMonth" class="calendar-day-content">
+      <h2>{{ dayNumber }}</h2>
+      <button v-on:click="addEvent()">Add Event</button>
+    </div>
     <!-- <p>{{ hasEvent }}</p>
     <p>{{ newEventStatus }}</p> -->
   </div>
@@ -10,8 +12,10 @@
 <style>
 .calendar-day {
   list-style: none;
-  border: 1px solid black;
   padding: 5px;
+  margin: 15px;
+  background-color: #eeeeee;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
 }
 </style>
 
