@@ -21,7 +21,6 @@
     </ol>
 
     <div>{{ events }}</div>
-    <div>{{ newEvents }}</div>
   </div>
 
   <!-- next steps: -->
@@ -62,10 +61,10 @@ export default {
       return dayjs(this.selectedDate).daysInMonth();
     },
     monthText() {
-      return Number(this.selectedDate.format("M"));
+      return this.selectedDate.format("M");
     },
     yearText() {
-      return Number(this.selectedDate.format("YYYY"));
+      return this.selectedDate.format("YYYY");
     },
 
     daysArray() {
