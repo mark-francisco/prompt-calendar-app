@@ -1,9 +1,10 @@
 <template>
   <div class="calendar-day">
-    <div v-if="isCurrentMonth" class="calendar-day-content">
-      <h2>{{ dayOfMonth }}</h2>
+    <div v-if="dayObject.currentMonth" class="calendar-day-content">
+      <h2>{{ dayObject.dayOfMonth }}</h2>
 
-      <button v-if="!event" v-on:click="addEvent()">Add Event</button>
+      <button v-if="!event" v-on:eventAdded="saveEvent($event)" v-on:click="addEvent()">Add Event</button>
+
       <button v-else v-on:click="editEvent()">Edit Event</button>
     </div>
   </div>
@@ -22,19 +23,9 @@
 <script>
 export default {
   props: {
-    formattedDate: {
-      type: String,
+    dayObject: {
+      type: Object,
       required: true,
-    },
-    dayOfMonth: {
-      type: Number,
-      required: true,
-    },
-    isCurrentMonth: {
-      type: Boolean,
-    },
-    isToday: {
-      type: Boolean,
     },
     event: {
       type: Object,
@@ -44,17 +35,23 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      newEvent: {},
+    };
   },
   methods: {
     addEvent() {
       this.$router.push({
         name: "addEvent",
-        params: { date: this.formattedDate, event: this.event, events: this.events },
+        params: { date: this.dayObject.formattedDate, event: this.event, events: this.events },
       });
     },
     editEvent() {
       this.$router.push({ name: "editEvent", params: { event: this.event, events: this.events } });
+    },
+    saveEvent(event) {
+      this.newEvent = event;
+      this.$emit("eventAdded", this.newEvent);
     },
   },
 };

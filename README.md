@@ -1,17 +1,23 @@
 # prompt-calendar-app
 
-## Pre-requisites: nodeJS / npm package manager installed on your computer.
+## Pre-requisites: npm (or equivalent) package manager installed on your computer.
 
-## Instructions:
+### Instructions:
 
-### install dependencies:
+### Install dependencies:
 
 ```
 npm install
 ```
 
-### start the application:
+### Start the application:
 
 ```
 npm run serve
+```
+
+### Once the application is running, navigate to localhost URL in your browser
+
+```
+e.g. localhost:8080.
 ```

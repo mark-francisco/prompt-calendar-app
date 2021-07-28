@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Add event to: {{ currentlySelectedDate }}</h1>
+    <h1>Add event to: {{ updatedEvent.date }}</h1>
 
-    <b-form-input v-model="title" placeholder="Enter Event Title"></b-form-input>
-    <b-form-datepicker v-model="currentlySelectedDate" placeholder="Enter date"></b-form-datepicker>
+    <b-form-input v-model="updatedEvent.title" placeholder="Enter Event Title"></b-form-input>
+    <b-form-datepicker v-model="updatedEvent.date" placeholder="Enter date"></b-form-datepicker>
 
     <button>
       <router-link class="m-4 calendar-event-button" to="/">Go Back</router-link>
@@ -23,21 +23,16 @@
 export default {
   data() {
     return {
-      updatedEvent: { title: null, date: null },
-      title: "",
-      currentlySelectedDate: this.$route.params.date,
+      updatedEvent: { title: null, date: this.$route.params.date },
       updatedEvents: this.$route.params.events,
     };
   },
   methods: {
     saveChanges() {
-      //use destructuring once this is confirmed working
-      this.updatedEvent["title"] = this.title;
-      this.updatedEvent["date"] = this.currentlySelectedDate;
       // emit back to Calendar.vue
       this.updatedEvents.push(this.updatedEvent);
       console.log(this.updatedEvents);
-      this.$emit("eventAdded", this.updatedEvents);
+      this.$emit("eventAdded", this.updatedEvent);
       this.$router.push({ path: "/" });
     },
   },

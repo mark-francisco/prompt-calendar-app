@@ -2,8 +2,7 @@
   <div id="app">
     <hr />
     <!-- router-view: Vue router will conditionally load the appropriate component based on URL-->
-    <router-view />
-    <!-- <app-calendar /> -->
+    <router-view></router-view>
   </div>
 </template>
 

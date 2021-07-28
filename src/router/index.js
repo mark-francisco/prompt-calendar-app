@@ -16,11 +16,13 @@ const routes = [
     path: "/add",
     name: "addEvent",
     component: AddEvent,
+    props: true,
   },
   {
     path: "/edit",
     name: "editEvent",
     component: EditEvent,
+    props: true,
   },
 ];
 

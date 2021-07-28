@@ -6,27 +6,23 @@
       <app-calendar-day
         v-for="day in daysArray"
         v-bind:key="day.formattedDate"
-        v-bind:formattedDate="day.formattedDate"
-        v-bind:dayOfMonth="day.dayOfMonth"
-        v-bind:isCurrentMonth="day.currentMonth"
-        v-bind:isToday="today.format('YYYY-MM-DD') === day.date"
+        v-bind:dayObject="day"
         v-bind:event="
           events.find((event) => {
             return event.date === day.formattedDate;
           })
         "
         v-bind:events="events"
-        v-on:eventAdded="events = $event"
+        v-on:eventAdded="updateArray($event)"
       ></app-calendar-day>
     </ol>
 
     <div>{{ events }}</div>
+    <div>{{ newEvents }}</div>
   </div>
 
   <!-- next steps: -->
   <!-- complete AddEvent and EditEvent components -->
-  <!-- add ability to change month / year -->
-  <!-- add styles based on isToday -->
 </template>
 
 <style scoped>
@@ -45,11 +41,18 @@ export default {
   data() {
     return {
       today: dayjs(),
-      selectedDate: dayjs().add(0, "month"),
+      selectedDate: dayjs(),
       events: [{ title: "test welcome event", date: dayjs().format("YYYY-MM-DD") }],
+      newEvents: [],
     };
   },
-  methods: {},
+  methods: {
+    updateArray(event) {
+      console.log(event, "hey");
+      this.events.push(event);
+      this.newEvents.push(event);
+    },
+  },
   computed: {
     // helper methods for generating the dayjs objects
     numDaysInMonth() {
