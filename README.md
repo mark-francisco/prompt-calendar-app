@@ -19,5 +19,5 @@ npm run serve
 ### Once the application is running, navigate to localhost URL in your browser
 
 ```
-e.g. localhost:8080.
+e.g. localhost:8080
 ```

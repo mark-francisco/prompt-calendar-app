@@ -1,5 +1,8 @@
 <template>
   <div class="calendar">
+    <button class="mx-4" v-on:click="changeMonth(-1)">Previous Month</button>
+    <button class="mx-4" v-on:click="changeMonth(1)">Next Month</button>
+    <hr />
     <app-heading v-bind:selectedDate="selectedDate" />
 
     <ol class="calendar-days-grid">
@@ -40,17 +43,17 @@ import dayjs from "dayjs";
 export default {
   data() {
     return {
-      today: dayjs(),
       selectedDate: dayjs(),
       events: [{ title: "test welcome event", date: dayjs().format("YYYY-MM-DD") }],
-      newEvents: [],
     };
   },
   methods: {
     updateArray(event) {
       console.log(event, "hey");
       this.events.push(event);
-      this.newEvents.push(event);
+    },
+    changeMonth(unit) {
+      this.selectedDate = this.selectedDate.add(unit, "month");
     },
   },
   computed: {
@@ -67,10 +70,10 @@ export default {
 
     daysArray() {
       // current month's cards
-      // create spread array based on a constructed array of defined length
+      // create spread array based on constructed array of defined length
       let arr = [...new Array(this.numDaysInMonth)];
 
-      // map each of the empty arrItems into dayjs objects by using helper methods
+      // map each of the empty arrItems into dayjs objects using helper methods
       arr = arr.map((_arrItem, index) => {
         return {
           date: dayjs(`${this.yearText}-${this.monthText}-${index + 1}`),
