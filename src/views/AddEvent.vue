@@ -26,6 +26,7 @@ export default {
       updatedEvent: { title: null, date: null },
       title: "",
       currentlySelectedDate: this.$route.params.date,
+      updatedEvents: this.$route.params.events,
     };
   },
   methods: {
@@ -33,6 +34,10 @@ export default {
       //use destructuring once this is confirmed working
       this.updatedEvent["title"] = this.title;
       this.updatedEvent["date"] = this.currentlySelectedDate;
+      // emit back to Calendar.vue
+      this.updatedEvents.push(this.updatedEvent);
+      console.log(this.updatedEvents);
+      this.$emit("eventAdded", this.updatedEvents);
       this.$router.push({ path: "/" });
     },
   },

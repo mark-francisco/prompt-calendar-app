@@ -39,16 +39,22 @@ export default {
     event: {
       type: Object,
     },
+    events: {
+      type: Array,
+    },
   },
   data() {
     return {};
   },
   methods: {
     addEvent() {
-      this.$router.push({ name: "addEvent", params: { date: this.formattedDate } });
+      this.$router.push({
+        name: "addEvent",
+        params: { date: this.formattedDate, event: this.event, events: this.events },
+      });
     },
     editEvent() {
-      this.$router.push({ name: "editEvent", params: { event: this.event } });
+      this.$router.push({ name: "editEvent", params: { event: this.event, events: this.events } });
     },
   },
 };

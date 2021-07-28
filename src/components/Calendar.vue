@@ -15,6 +15,8 @@
             return event.date === day.formattedDate;
           })
         "
+        v-bind:events="events"
+        v-on:eventAdded="events = $event"
       ></app-calendar-day>
     </ol>
 
@@ -22,7 +24,6 @@
   </div>
 
   <!-- next steps: -->
-  <!-- add events properties to days -->
   <!-- complete AddEvent and EditEvent components -->
   <!-- add ability to change month / year -->
   <!-- add styles based on isToday -->
